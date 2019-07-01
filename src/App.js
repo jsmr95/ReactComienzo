@@ -22,7 +22,8 @@ const App = props => {
         { name: nombre, age: 28 }, 
         { name: 'JOSE', age: 23 }, 
         { name: 'THOMAS', age: 18 }
-      ]
+      ],
+      showPersons: true,
     });
   }
 
@@ -62,21 +63,15 @@ const App = props => {
   if (personsState.showPersons) {
     persons = (
       <div>
-          <Person
-            click={switchNameHandler.bind(this, 'pepasdf')} 
-            name={personsState.persons[0].name} 
-            changed={switchChangedHandler} 
-            age={personsState.persons[0].age} />
-          <Person 
-            changed={switchChangedHandler} 
-            click={switchNameHandler.bind(this, 'a')} 
-            name={personsState.persons[1].name} 
-            age={personsState.persons[1].age} >My hobbies: jugar! </Person>
-          <Person 
-            click={switchNameHandler.bind(this, 'pepasdf')} 
-            name={personsState.persons[2].name}
-            changed={switchChangedHandler}  
-            age={personsState.persons[2].age} />
+        {
+          personsState.persons.map( person => {
+            return <Person
+              click={switchNameHandler.bind(this, 'pruebaClick')} 
+              name={person.name} 
+              changed={switchChangedHandler} 
+              age={person.age} />
+            })            
+          }
         </div> 
     );
   }
