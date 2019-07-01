@@ -57,16 +57,11 @@ const App = props => {
     cursor: 'pointer'
   };
 
-  return (
-    <div className="App">
-      <h1>Hola</h1>
-      <button onClick={togglePersonsHandler} 
-      style={style}
-      >
-        Toggle Persons
-      </button>
-      { personsState.showPersons === true ?
-          <div>
+  let persons = null;
+
+  if (personsState.showPersons) {
+    persons = (
+      <div>
           <Person
             click={switchNameHandler.bind(this, 'pepasdf')} 
             name={personsState.persons[0].name} 
@@ -82,8 +77,19 @@ const App = props => {
             name={personsState.persons[2].name}
             changed={switchChangedHandler}  
             age={personsState.persons[2].age} />
-        </div> : null
-      }
+        </div> 
+    );
+  }
+
+  return (
+    <div className="App">
+      <h1>Hola</h1>
+      <button onClick={togglePersonsHandler} 
+      style={style}
+      >
+        Toggle Persons
+      </button>
+      { persons }
     </div>
   );
     /*var h1 = React.createElement('h1', null, 'Hola soy React!!')
