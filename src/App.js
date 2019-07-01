@@ -12,16 +12,13 @@ const App = props => {
       { name: 'Thomas', age: 18 }
     ],
   });
-
-  console.log(personsState);
   
-
-  const switchNameHandler = () => {
+  const switchNameHandler = (nombre) => {
     //console.log('Was clicked!');
     //DONT DO THIS: this.state.persons[0].name = "Maximilia";
     setPersonsState({
       persons: [
-        { name: 'MAX', age: 28 }, 
+        { name: nombre, age: 28 }, 
         { name: 'JOSE', age: 23 }, 
         { name: 'THOMAS', age: 18 }
       ]
@@ -31,10 +28,24 @@ const App = props => {
   return (
     <div className="App">
       <h1>Hola</h1>
-      <button onClick={switchNameHandler}>Switch Name</button>
-      <Person name={personsState.persons[0].name} age={personsState.persons[0].age} />
-      <Person name={personsState.persons[1].name} age={personsState.persons[1].age} >My hobbies: jugar! </Person>
-      <Person name={personsState.persons[2].name} age={personsState.persons[2].age} />
+      <button onClick={(e) => {
+        console.log(e);
+        switchNameHandler('Masdfasdfadsf');
+      }}>
+        Switch Name
+      </button>
+      <Person
+        click={switchNameHandler.bind(this, 'pepasdf')} 
+        name={personsState.persons[0].name} 
+        age={personsState.persons[0].age} />
+      <Person 
+        click={switchNameHandler.bind(this, 'a')} 
+        name={personsState.persons[1].name} 
+        age={personsState.persons[1].age} >My hobbies: jugar! </Person>
+      <Person 
+        click={switchNameHandler.bind(this, 'pepasdf')} 
+        name={personsState.persons[2].name} 
+        age={personsState.persons[2].age} />
     </div>
   );
     /*var h1 = React.createElement('h1', null, 'Hola soy React!!')
