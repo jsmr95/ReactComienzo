@@ -7,9 +7,9 @@ const App = props => {
 
   const [ personsState, setPersonsState ] = useState({
     persons: [
-      { name: 'Max', age: 28 }, 
-      { name: 'Jose', age: 23 }, 
-      { name: 'Thomas', age: 18 }
+      { id:'1', name: 'Max', age: 28 }, 
+      { id:'2', name: 'Jose', age: 23 }, 
+      { id:'3', name: 'Thomas', age: 18 }
     ],
     showPersons: true,
   });
@@ -27,15 +27,29 @@ const App = props => {
     });
   }
 
-  const switchChangedHandler = (event) => {
-    setPersonsState({
-      persons: [
-        { name: 'Max', age: 28 }, 
-        { name: event.target.value, age: 23 }, 
-        { name: 'THOMAS', age: 18 }
-      ],
-      showPersons: true,
+  const deletePersonHandler = (i) => {
+    const persons = [...personsState.persons];
+    persons.splice(i, 1);
+    setPersonsState({persons: persons, showPersons:true});
+  }
+
+  const switchChangedHandler = (event, id) => {
+
+    const personIndex = personsState.persons.findIndex(p => {
+      return p.id === id;
     });
+    
+    const person = {
+      ...personsState.persons[personIndex]
+    };
+
+    person.name = event.target.value;
+
+    const persons = [...personsState.persons];
+    persons[personIndex] = person;
+
+    setPersonsState({persons: persons, showPersons:true});
+
   }
 
    const togglePersonsHandler = () => {
@@ -64,12 +78,13 @@ const App = props => {
     persons = (
       <div>
         {
-          personsState.persons.map( person => {
+          personsState.persons.map( (person, index) => {
             return <Person
-              click={switchNameHandler.bind(this, 'pruebaClick')} 
+              click={() => deletePersonHandler(index)} 
               name={person.name} 
-              changed={switchChangedHandler} 
-              age={person.age} />
+              changed={(event) => switchChangedHandler(event, person.id)} 
+              age={person.age} 
+              key={person.id}/>
             })            
           }
         </div> 
