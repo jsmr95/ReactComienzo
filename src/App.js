@@ -11,7 +11,7 @@ const App = props => {
       { id:'2', name: 'Jose', age: 23 }, 
       { id:'3', name: 'Thomas', age: 18 }
     ],
-    showPersons: true,
+    showPersons: false,
   });
   
   const switchNameHandler = (nombre) => {
@@ -65,7 +65,8 @@ const App = props => {
   };
 
   const style = {
-    backgroundColor: 'white',
+    backgroundColor: 'green',
+    color: 'white',
     font: 'inherit',
     border: '1px solid blue',
     padding: '8px',
@@ -89,6 +90,7 @@ const App = props => {
           }
         </div> 
     );
+    style.backgroundColor = 'red';
   }
 
   return (
