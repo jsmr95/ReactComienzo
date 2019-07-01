@@ -35,13 +35,23 @@ const App = props => {
     });
   }
 
+  const style = {
+    backgroundColor: 'white',
+    font: 'inherit',
+    border: '1px solid blue',
+    padding: '8px',
+    cursor: 'pointer'
+  };
+
   return (
     <div className="App">
       <h1>Hola</h1>
       <button onClick={(e) => {
         console.log(e);
-        switchNameHandler('Masdfasdfadsf');
-      }}>
+        switchNameHandler('Paco pacomé');
+      }} 
+      style={style}
+      >
         Switch Name
       </button>
       <Person
