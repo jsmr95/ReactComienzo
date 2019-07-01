@@ -11,6 +11,7 @@ const App = props => {
       { name: 'Jose', age: 23 }, 
       { name: 'Thomas', age: 18 }
     ],
+    showPersons: true,
   });
   
   const switchNameHandler = (nombre) => {
@@ -31,9 +32,22 @@ const App = props => {
         { name: 'Max', age: 28 }, 
         { name: event.target.value, age: 23 }, 
         { name: 'THOMAS', age: 18 }
-      ]
+      ],
+      showPersons: true,
     });
   }
+
+   const togglePersonsHandler = () => {
+    const doesShow = personsState.showPersons;
+    
+    setPersonsState({
+      persons: [
+        { name: 'Max', age: 28 }, 
+        { name: 'Jose', age: 23 }, 
+        { name: 'Thomas', age: 18 }
+      ],
+    showPersons: !doesShow});
+  };
 
   const style = {
     backgroundColor: 'white',
@@ -46,27 +60,30 @@ const App = props => {
   return (
     <div className="App">
       <h1>Hola</h1>
-      <button onClick={(e) => {
-        console.log(e);
-        switchNameHandler('Paco pacomé');
-      }} 
+      <button onClick={togglePersonsHandler} 
       style={style}
       >
-        Switch Name
+        Toggle Persons
       </button>
-      <Person
-        click={switchNameHandler.bind(this, 'pepasdf')} 
-        name={personsState.persons[0].name} 
-        age={personsState.persons[0].age} />
-      <Person 
-        changed={switchChangedHandler} 
-        click={switchNameHandler.bind(this, 'a')} 
-        name={personsState.persons[1].name} 
-        age={personsState.persons[1].age} >My hobbies: jugar! </Person>
-      <Person 
-        click={switchNameHandler.bind(this, 'pepasdf')} 
-        name={personsState.persons[2].name} 
-        age={personsState.persons[2].age} />
+      { personsState.showPersons === true ?
+          <div>
+          <Person
+            click={switchNameHandler.bind(this, 'pepasdf')} 
+            name={personsState.persons[0].name} 
+            changed={switchChangedHandler} 
+            age={personsState.persons[0].age} />
+          <Person 
+            changed={switchChangedHandler} 
+            click={switchNameHandler.bind(this, 'a')} 
+            name={personsState.persons[1].name} 
+            age={personsState.persons[1].age} >My hobbies: jugar! </Person>
+          <Person 
+            click={switchNameHandler.bind(this, 'pepasdf')} 
+            name={personsState.persons[2].name}
+            changed={switchChangedHandler}  
+            age={personsState.persons[2].age} />
+        </div> : null
+      }
     </div>
   );
     /*var h1 = React.createElement('h1', null, 'Hola soy React!!')
