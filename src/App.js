@@ -25,6 +25,16 @@ const App = props => {
     });
   }
 
+  const switchChangedHandler = (event) => {
+    setPersonsState({
+      persons: [
+        { name: 'Max', age: 28 }, 
+        { name: event.target.value, age: 23 }, 
+        { name: 'THOMAS', age: 18 }
+      ]
+    });
+  }
+
   return (
     <div className="App">
       <h1>Hola</h1>
@@ -39,6 +49,7 @@ const App = props => {
         name={personsState.persons[0].name} 
         age={personsState.persons[0].age} />
       <Person 
+        changed={switchChangedHandler} 
         click={switchNameHandler.bind(this, 'a')} 
         name={personsState.persons[1].name} 
         age={personsState.persons[1].age} >My hobbies: jugar! </Person>
